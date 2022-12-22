@@ -9,6 +9,37 @@ class AddTransaction extends StatefulWidget {
 }
 
 class _AddTransactionState extends State<AddTransaction> {
+  int? amount;
+  String note = "Some Expense";
+  String type = "Income";
+  DateTime selectedDate = DateTime.now();
+  List<String> months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Nov",
+    "Dec"
+  ];
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2020, 12),
+        lastDate: DateTime(2100, 12));
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +73,11 @@ class _AddTransactionState extends State<AddTransaction> {
                     hintText: "0",
                     border: InputBorder.none,
                   ),
+                  onChanged: (val) {
+                    try {
+                      amount = int.parse(val);
+                    } catch (e) {}
+                  },
                   style: TextStyle(fontSize: 24),
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
@@ -72,6 +108,9 @@ class _AddTransactionState extends State<AddTransaction> {
                     hintText: "Note",
                     border: InputBorder.none,
                   ),
+                  onChanged: (val) {
+                    note = val;
+                  },
                   style: TextStyle(fontSize: 24),
                   //inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   //keyboardType: TextInputType.number,
@@ -83,6 +122,86 @@ class _AddTransactionState extends State<AddTransaction> {
           SizedBox(
             height: 20,
           ),
+          Row(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.0),
+                      color: Colors.amber),
+                  padding: EdgeInsets.all(12),
+                  child: Icon(
+                    Icons.moving_sharp,
+                    //color: Colors.white,//change icon color here
+                  )),
+              SizedBox(
+                width: 12,
+              ),
+              ChoiceChip(
+                selectedColor: Colors.amber,
+                label: Text(
+                  "Income",
+                  style: TextStyle(
+                      color: type == "Income" ? Colors.white : Colors.black),
+                ),
+                selected: type == "Income" ? true : false,
+                onSelected: (val) {
+                  if (val) {
+                    setState(() {
+                      type = "Income";
+                    });
+                  }
+                },
+              ),
+              SizedBox(
+                width: 12,
+              ),
+              ChoiceChip(
+                selectedColor: Colors.amber,
+                label: Text(
+                  "Expense",
+                  style: TextStyle(
+                      color: type == "Expense" ? Colors.white : Colors.black),
+                ),
+                selected: type == "Expense" ? true : false,
+                onSelected: (val) {
+                  if (val) {
+                    setState(() {
+                      type = "Expense";
+                    });
+                  }
+                },
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.0),
+                      color: Colors.amber),
+                  padding: EdgeInsets.all(12),
+                  child: Icon(
+                    Icons.date_range_outlined,
+                    //color: Colors.white,//change icon color here
+                  )),
+              TextButton(
+                  onPressed: () {
+                    _selectDate(context);
+                  },
+                  child: Text("${selectedDate.day} / ${selectedDate.month}")),
+            ],
+          ),
+          ElevatedButton(
+              onPressed: () {
+                print(amount);
+                print(note);
+                print(type);
+                print(selectedDate);
+              },
+              child: Text("Add"))
         ],
       ),
     );
