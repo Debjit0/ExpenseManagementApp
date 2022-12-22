@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mini_proj_expense_2/controllers/db_helper.dart';
 
 class AddTransaction extends StatefulWidget {
   const AddTransaction({super.key});
@@ -196,10 +197,12 @@ class _AddTransactionState extends State<AddTransaction> {
           ),
           ElevatedButton(
               onPressed: () {
-                print(amount);
-                print(note);
-                print(type);
-                print(selectedDate);
+                if (amount != null && note.isNotEmpty) {
+                  DbHelper dbHelper = new DbHelper();
+                  dbHelper.addData(amount!, selectedDate, note, type);
+                } else {
+                  print("Not all Values provided");
+                }
               },
               child: Text("Add"))
         ],
