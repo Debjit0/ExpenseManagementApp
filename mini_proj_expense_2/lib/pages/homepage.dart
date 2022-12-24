@@ -33,7 +33,53 @@ class _HomePageState extends State<HomePage> {
             } else {
               return ListView(
                 children: [
-                  Text("Prince"),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              child: Text(
+                                "Hi There!",
+                                style: TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(12)),
+                          child: Icon(
+                            size: 32,
+                            Icons.settings,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    margin: EdgeInsets.all(12.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              colors: [Colors.black, Colors.blueAccent])),
+                      child: Column(
+                        children: [
+                          Text(
+                            "Total Balance",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 22, color: Colors.green),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               );
             }
