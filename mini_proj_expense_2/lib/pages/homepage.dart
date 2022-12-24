@@ -21,9 +21,27 @@ class _HomePageState extends State<HomePage> {
       body: FutureBuilder<Map>(
         future: dbHelper.fetch(),
         builder: (context, snapshot) {
-          return Center(
-            child: Text("No Data"),
-          );
+          if (snapshot.hasError) {
+            return Center(
+              child: Text("Unexpected Error"),
+            );
+          } else if (snapshot.hasData) {
+            if (snapshot.data!.isEmpty) {
+              return Center(
+                child: Text("No Values Found"),
+              );
+            } else {
+              return ListView(
+                children: [
+                  Text("Prince"),
+                ],
+              );
+            }
+          } else {
+            return Center(
+              child: Text("Unexpected Error"),
+            );
+          }
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
