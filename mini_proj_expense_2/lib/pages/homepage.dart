@@ -97,8 +97,11 @@ class _HomePageState extends State<HomePage> {
                             Padding(
                               padding: EdgeInsets.all(8),
                               child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   cardIncome("1200"),
+                                  cardExpense("1200")
                                 ],
                               ),
                             )
@@ -145,8 +148,10 @@ class _HomePageState extends State<HomePage> {
             size: 28,
             color: Colors.green,
           ),
+          margin: EdgeInsets.only(right: 8),
         ),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "Income",
@@ -161,4 +166,39 @@ class _HomePageState extends State<HomePage> {
       ],
     );
   }
+
+  Widget cardExpense(String value) {
+    return Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              "Expense",
+              style: TextStyle(fontSize: 20, color: Colors.white),
+            ),
+            Text(
+              value,
+              style: TextStyle(fontSize: 20, color: Colors.white),
+            ),
+          ],
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          padding: EdgeInsets.all(6),
+          child: Icon(
+            Icons.arrow_upward,
+            size: 28,
+            color: Colors.red,
+          ),
+          margin: EdgeInsets.only(left: 8),
+        ),
+      ],
+    );
+  }
 }
+//53:33
+//https://www.youtube.com/watch?v=VOWy5-zTeWk&t=2462s
