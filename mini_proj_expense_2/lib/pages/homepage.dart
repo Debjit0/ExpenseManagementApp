@@ -14,6 +14,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   DbHelper dbHelper = new DbHelper();
+  int totalBalance = 0;
+  int totalIncome = 0;
+  int totalExpense = 0;
+
+  getTotalBalance(Map entireData) {
+    entireData.forEach((key, value) {
+      print(key);
+      print("key");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +42,7 @@ class _HomePageState extends State<HomePage> {
                 child: Text("No Values Found"),
               );
             } else {
+              getTotalBalance(snapshot.data!);
               return ListView(
                 children: [
                   Padding(
