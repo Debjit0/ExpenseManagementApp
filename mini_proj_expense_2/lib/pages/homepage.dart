@@ -20,8 +20,17 @@ class _HomePageState extends State<HomePage> {
 
   getTotalBalance(Map entireData) {
     entireData.forEach((key, value) {
-      print(key);
-      print("key");
+      print(value);
+      print("Total Balance $totalBalance");
+      print("Total Expense $totalExpense");
+      print("Total Income $totalIncome");
+      if (value?['type' == 'Income'] ?? false) {
+        totalBalance += (value['amount'] as int);
+        totalIncome += (value['amount'] as int);
+      } else if (value?['type' == 'Expense'] ?? false) {
+        totalBalance -= (value['amount'] as int);
+        totalExpense += (value['amount'] as int);
+      }
     });
   }
 
@@ -95,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             SizedBox(height: 12),
                             Text(
-                              "Rs. 3500",
+                              "Rs. $totalBalance",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 26,
@@ -111,8 +120,8 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  cardIncome("1200"),
-                                  cardExpense("1200")
+                                  cardIncome(totalIncome.toString()),
+                                  cardExpense(totalExpense.toString()),
                                 ],
                               ),
                             )
