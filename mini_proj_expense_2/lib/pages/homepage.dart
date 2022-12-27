@@ -24,10 +24,10 @@ class _HomePageState extends State<HomePage> {
       print("Total Balance $totalBalance");
       print("Total Expense $totalExpense");
       print("Total Income $totalIncome");
-      if (value?['type' == 'Income'] ?? false) {
+      if (value['type'] == 'Income') {
         totalBalance += (value['amount'] as int);
         totalIncome += (value['amount'] as int);
-      } else if (value?['type' == 'Expense'] ?? false) {
+      } else if (value['type'] == 'Expense') {
         totalBalance -= (value['amount'] as int);
         totalExpense += (value['amount'] as int);
       }
