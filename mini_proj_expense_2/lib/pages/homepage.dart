@@ -19,6 +19,9 @@ class _HomePageState extends State<HomePage> {
   int totalExpense = 0;
 
   getTotalBalance(Map entireData) {
+    totalExpense = 0;
+    totalIncome = 0;
+    totalBalance = 0;
     entireData.forEach((key, value) {
       print(value);
       print("Total Balance $totalBalance");
@@ -144,7 +147,10 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => AddTransaction()));
+              .push(MaterialPageRoute(builder: (_) => AddTransaction()))
+              .whenComplete(() {
+            setState(() {});
+          });
         },
         child: Icon(
           Icons.add,

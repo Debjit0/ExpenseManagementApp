@@ -196,10 +196,11 @@ class _AddTransactionState extends State<AddTransaction> {
             ],
           ),
           ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (amount != null && note.isNotEmpty) {
                   DbHelper dbHelper = new DbHelper();
-                  dbHelper.addData(amount!, selectedDate, note, type);
+                  await dbHelper.addData(amount!, selectedDate, note, type);
+                  Navigator.of(context).pop();
                 } else {
                   print("Not all Values provided");
                 }
