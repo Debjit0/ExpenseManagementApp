@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -133,6 +135,29 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.all(12),
+                    child: Text(
+                      "Recent Expense",
+                      style: TextStyle(
+                          fontSize: 32,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        Map dataAtIndex = snapshot.data![index];
+                        if (dataAtIndex['type'] == 'Income')
+                          return incomeTile(
+                              dataAtIndex['amount'], dataAtIndex['note']);
+                        else
+                          return expenseTile(
+                              dataAtIndex['amount'], dataAtIndex['note']);
+                      })
                 ],
               );
             }
@@ -223,6 +248,78 @@ class _HomePageState extends State<HomePage> {
           margin: EdgeInsets.only(left: 8),
         ),
       ],
+    );
+  }
+
+  Widget expenseTile(int value, String note) {
+    return Container(
+      margin: EdgeInsets.all(8),
+      padding: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Color(0xffced4eb),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.arrow_circle_up_rounded,
+                size: 28,
+                color: Colors.red,
+              ),
+              SizedBox(
+                width: 4.0,
+              ),
+              Text(
+                "$note",
+                style: TextStyle(fontSize: 20),
+              ),
+            ],
+          ),
+          Text(
+            "-$value",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget incomeTile(int value, String note) {
+    return Container(
+      margin: EdgeInsets.all(8),
+      padding: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Color(0xffced4eb),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.arrow_circle_down_rounded,
+                size: 28,
+                color: Colors.green,
+              ),
+              SizedBox(
+                width: 4.0,
+              ),
+              Text(
+                "$note",
+                style: TextStyle(fontSize: 20),
+              ),
+            ],
+          ),
+          Text(
+            "+$value",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
     );
   }
 }
