@@ -74,6 +74,7 @@ class _HomePageState extends State<HomePage> {
               );
             } else {
               getTotalBalance(snapshot.data!);
+              getPlotPoints(snapshot.data!);
               return ListView(
                 children: [
                   Padding(
@@ -165,6 +166,26 @@ class _HomePageState extends State<HomePage> {
                   //
                   //
                   //
+
+                  /*dataSet.length < 2
+                      ? Container(
+                          margin: EdgeInsets.all(12),
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.4),
+                                  spreadRadius: 5,
+                                  blurRadius: 6,
+                                  offset: Offset(0, 4),
+                                )
+                              ]),
+                          //height: 400,
+                          child: Text("Not Enough Data To Plot Chart"),
+                        )
+                      : */
                   Container(
                     margin: EdgeInsets.all(12),
                     padding: EdgeInsets.all(12),
