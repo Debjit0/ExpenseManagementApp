@@ -138,6 +138,16 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: EdgeInsets.all(12),
                     child: Text(
+                      "Expenses",
+                      style: TextStyle(
+                          fontSize: 32,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(12),
+                    child: Text(
                       "Recent Expense",
                       style: TextStyle(
                           fontSize: 32,
