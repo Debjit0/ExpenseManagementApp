@@ -22,15 +22,20 @@ class _HomePageState extends State<HomePage> {
   int totalExpense = 0;
   List<FlSpot> dataSet = [];
   DateTime today = DateTime.now();
-
+  double d1 = 0;
+  double d2 = 0;
   List<FlSpot> getPlotPoints(Map entireData) {
     dataSet = [];
     entireData.forEach((key, value) {
       if (value['type'] == 'expense' &&
           (value['date'] as DateTime).month == today.month) {
+        //d1 = value['date'].toDouble();
+        //d2 = value['amount'].toDouble();
+        //print("$d1 + $d2");
+
         dataSet.add(
-          FlSpot((value['date'] as DateTime).month.toDouble(),
-              (value['amount'] as int).toDouble()),
+          FlSpot((value['date'] as DateTime).day.toDouble(),
+              value['amount'].toDouble()),
         );
       }
     });
@@ -153,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  const Padding(
+                  /*const Padding(
                     padding: EdgeInsets.all(12),
                     child: Text(
                       "Expenses",
@@ -167,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                   //
                   //
 
-                  /*dataSet.length < 2
+                  dataSet.length < 2
                       ? Container(
                           margin: EdgeInsets.all(12),
                           padding: EdgeInsets.all(12),
@@ -185,37 +190,37 @@ class _HomePageState extends State<HomePage> {
                           //height: 400,
                           child: Text("Not Enough Data To Plot Chart"),
                         )
-                      : */
-                  Container(
-                    margin: EdgeInsets.all(12),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.4),
-                            spreadRadius: 5,
-                            blurRadius: 6,
-                            offset: Offset(0, 4),
-                          )
-                        ]),
-                    height: 400,
-                    child: LineChart(
-                      LineChartData(
-                          borderData: FlBorderData(show: false),
-                          lineBarsData: [
-                            LineChartBarData(
-                              spots: getPlotPoints(snapshot.data!),
-                              isCurved: false,
-                              barWidth: 2.5,
-                              color: Colors.orange,
-                            ),
-                          ]),
-                    ),
-                  ),
+                      : Container(
+                          margin: EdgeInsets.all(12),
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.4),
+                                  spreadRadius: 5,
+                                  blurRadius: 6,
+                                  offset: Offset(0, 4),
+                                )
+                              ]),
+                          height: 400,
+                          child: LineChart(
+                            LineChartData(
+                                borderData: FlBorderData(show: false),
+                                lineBarsData: [
+                                  LineChartBarData(
+                                    spots: getPlotPoints(snapshot.data!),
+                                    isCurved: false,
+                                    barWidth: 2.5,
+                                    color: Colors.orange,
+                                  ),
+                                ]),
+                          ),
+                        ),
                   //
                   //
+                  d*/
                   const Padding(
                     padding: EdgeInsets.all(12),
                     child: Text(
