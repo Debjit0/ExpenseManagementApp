@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -19,6 +20,22 @@ class _HomePageState extends State<HomePage> {
   int totalBalance = 0;
   int totalIncome = 0;
   int totalExpense = 0;
+  List<FlSpot> dataSet = [];
+  DateTime today = DateTime.now();
+
+  List<FlSpot> getPlotPoints(Map entireData) {
+    dataSet = [];
+    entireData.forEach((key, value) {
+      if (value['type'] == 'expense' &&
+          (value['date'] as DateTime).month == today.month) {
+        dataSet.add(
+          FlSpot((value['date'] as DateTime).month.toDouble(),
+              (value['amount'] as int).toDouble()),
+        );
+      }
+    });
+    return dataSet;
+  }
 
   getTotalBalance(Map entireData) {
     totalExpense = 0;
@@ -135,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.all(12),
                     child: Text(
                       "Expenses",
@@ -145,7 +162,40 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Padding(
+                  //
+                  //
+                  //
+                  Container(
+                    margin: EdgeInsets.all(12),
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.4),
+                            spreadRadius: 5,
+                            blurRadius: 6,
+                            offset: Offset(0, 4),
+                          )
+                        ]),
+                    height: 400,
+                    child: LineChart(
+                      LineChartData(
+                          borderData: FlBorderData(show: false),
+                          lineBarsData: [
+                            LineChartBarData(
+                              spots: getPlotPoints(snapshot.data!),
+                              isCurved: false,
+                              barWidth: 2.5,
+                              color: Colors.orange,
+                            ),
+                          ]),
+                    ),
+                  ),
+                  //
+                  //
+                  const Padding(
                     padding: EdgeInsets.all(12),
                     child: Text(
                       "Recent Expense",
