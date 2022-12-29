@@ -89,12 +89,27 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Row(
                           children: [
-                            Container(
-                              child: Text(
-                                "Hi There!",
-                                style: TextStyle(
-                                    fontSize: 25, fontWeight: FontWeight.bold),
-                              ),
+                            Row(
+                              children: [
+                                Container(
+                                  child: Text(
+                                    "Hi There",
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 32,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.grey),
+                                  ),
+                                ),
+                                Container(
+                                  child: Text(
+                                    "..!",
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 32,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.orange),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -116,9 +131,15 @@ class _HomePageState extends State<HomePage> {
                     margin: EdgeInsets.all(12.0),
                     child: Container(
                       decoration: BoxDecoration(
+                          boxShadow: [
+                            new BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 15.0,
+                            ),
+                          ],
                           borderRadius: BorderRadius.all(Radius.circular(24)),
                           gradient: LinearGradient(
-                              colors: [Colors.black, Colors.blueAccent])),
+                              colors: [Colors.orange, Colors.deepOrange])),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 20, horizontal: 8),
@@ -127,17 +148,19 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               "Total Balance",
                               textAlign: TextAlign.center,
-                              style:
-                                  TextStyle(fontSize: 22, color: Colors.white),
+                              style: GoogleFonts.roboto(
+                                  fontSize: 26,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(height: 12),
+                            SizedBox(height: 6),
                             Text(
                               "Rs. $totalBalance",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 26,
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w700),
+                                  fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               height: 12,
@@ -225,9 +248,9 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.all(12),
                     child: Text(
                       "Recent Expense",
-                      style: TextStyle(
+                      style: GoogleFonts.roboto(
                           fontSize: 32,
-                          color: Colors.black,
+                          color: Colors.grey,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -292,11 +315,17 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text(
               "Income",
-              style: TextStyle(fontSize: 20, color: Colors.white),
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
             ),
             Text(
               value,
-              style: TextStyle(fontSize: 20, color: Colors.white),
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
             ),
           ],
         )
@@ -312,11 +341,17 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text(
               "Expense",
-              style: TextStyle(fontSize: 20, color: Colors.white),
+              style: GoogleFonts.roboto(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
             ),
             Text(
               value,
-              style: TextStyle(fontSize: 20, color: Colors.white),
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
             ),
           ],
         ),
