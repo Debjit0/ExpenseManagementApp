@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  DbHelper dbHelper = new DbHelper();
+  DbHelper dbHelper = DbHelper();
   int totalBalance = 0;
   int totalIncome = 0;
   int totalExpense = 0;
@@ -116,9 +116,9 @@ class _HomePageState extends State<HomePage> {
                         Container(
                           padding: EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                              color: Colors.blue,
                               borderRadius: BorderRadius.circular(12)),
                           child: Icon(
+                            color: Colors.deepOrange,
                             size: 32,
                             Icons.settings,
                           ),
@@ -131,15 +131,21 @@ class _HomePageState extends State<HomePage> {
                     margin: EdgeInsets.all(12.0),
                     child: Container(
                       decoration: BoxDecoration(
-                          boxShadow: [
-                            new BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 15.0,
-                            ),
-                          ],
-                          borderRadius: BorderRadius.all(Radius.circular(24)),
-                          gradient: LinearGradient(
-                              colors: [Colors.orange, Colors.deepOrange])),
+                        color: Color.fromARGB(255, 23, 23, 23),
+                        boxShadow: [
+                          new BoxShadow(
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            blurRadius: 20.0,
+                            offset: Offset(6, 6),
+                          ),
+                          new BoxShadow(
+                            color: Color.fromARGB(255, 36, 36, 36),
+                            blurRadius: 20.0,
+                            offset: Offset(-6, -6),
+                          ),
+                        ],
+                        borderRadius: BorderRadius.all(Radius.circular(24)),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 20, horizontal: 8),
@@ -150,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                               textAlign: TextAlign.center,
                               style: GoogleFonts.roboto(
                                   fontSize: 26,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
                             SizedBox(height: 6),
@@ -244,15 +250,29 @@ class _HomePageState extends State<HomePage> {
                   //
                   //
                   d*/
-                  Padding(
-                    padding: EdgeInsets.all(12),
-                    child: Text(
-                      "Recent Expense",
-                      style: GoogleFonts.roboto(
-                          fontSize: 32,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.bold),
-                    ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(12, 12, 0, 12),
+                        child: Text(
+                          "Recent Expense",
+                          style: GoogleFonts.roboto(
+                              fontSize: 32,
+                              color: Colors.grey,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 12, 12, 12),
+                        child: Text(
+                          "..!",
+                          style: GoogleFonts.roboto(
+                              fontSize: 32,
+                              color: Colors.orange,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
                   ),
                   ListView.builder(
                       shrinkWrap: true,
@@ -299,7 +319,18 @@ class _HomePageState extends State<HomePage> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(5, 5),
+                color: Colors.black,
+                blurRadius: 20,
+              ),
+              BoxShadow(
+                  offset: Offset(-4, -4),
+                  color: Color.fromARGB(255, 49, 49, 49),
+                  blurRadius: 20)
+            ],
+            color: Color.fromARGB(255, 45, 45, 45),
             borderRadius: BorderRadius.circular(20),
           ),
           padding: EdgeInsets.all(6),
@@ -357,7 +388,18 @@ class _HomePageState extends State<HomePage> {
         ),
         Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(5, 5),
+                color: Colors.black,
+                blurRadius: 20,
+              ),
+              BoxShadow(
+                  offset: Offset(-4, -4),
+                  color: Color.fromARGB(255, 49, 49, 49),
+                  blurRadius: 20)
+            ],
+            color: Color.fromARGB(255, 45, 45, 45),
             borderRadius: BorderRadius.circular(20),
           ),
           padding: EdgeInsets.all(6),
