@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_proj_expense_2/controllers/db_helper.dart';
 
 class AddTransaction extends StatefulWidget {
@@ -44,13 +45,17 @@ class _AddTransactionState extends State<AddTransaction> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(24, 24, 24, 1.0),
       appBar: AppBar(toolbarHeight: 0.0),
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
           Text("Add Transactions",
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+              style: GoogleFonts.lato(
+                  color: Colors.grey,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold)),
           SizedBox(
             height: 20,
           ),
@@ -59,7 +64,7 @@ class _AddTransactionState extends State<AddTransaction> {
               Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16.0),
-                      color: Colors.amber),
+                      color: Colors.deepOrange),
                   padding: EdgeInsets.all(12),
                   child: Icon(
                     Icons.attach_money,
@@ -71,7 +76,9 @@ class _AddTransactionState extends State<AddTransaction> {
               Expanded(
                 child: TextField(
                   decoration: InputDecoration(
+                    //fillColor: Colors.grey,
                     hintText: "0",
+                    hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
                   ),
                   onChanged: (val) {
@@ -79,7 +86,7 @@ class _AddTransactionState extends State<AddTransaction> {
                       amount = int.parse(val);
                     } catch (e) {}
                   },
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(fontSize: 24, color: Colors.grey),
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                 ),
@@ -94,7 +101,7 @@ class _AddTransactionState extends State<AddTransaction> {
               Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16.0),
-                      color: Colors.amber),
+                      color: Colors.deepOrange),
                   padding: EdgeInsets.all(12),
                   child: Icon(
                     Icons.description,
@@ -107,6 +114,7 @@ class _AddTransactionState extends State<AddTransaction> {
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: "Note",
+                    hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
                   ),
                   onChanged: (val) {
@@ -128,7 +136,7 @@ class _AddTransactionState extends State<AddTransaction> {
               Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16.0),
-                      color: Colors.amber),
+                      color: Colors.deepOrange),
                   padding: EdgeInsets.all(12),
                   child: Icon(
                     Icons.moving_sharp,
@@ -138,7 +146,7 @@ class _AddTransactionState extends State<AddTransaction> {
                 width: 12,
               ),
               ChoiceChip(
-                selectedColor: Colors.amber,
+                selectedColor: Colors.deepOrange,
                 label: Text(
                   "Income",
                   style: TextStyle(
@@ -157,7 +165,7 @@ class _AddTransactionState extends State<AddTransaction> {
                 width: 12,
               ),
               ChoiceChip(
-                selectedColor: Colors.amber,
+                selectedColor: Colors.deepOrange,
                 label: Text(
                   "Expense",
                   style: TextStyle(
@@ -182,7 +190,7 @@ class _AddTransactionState extends State<AddTransaction> {
               Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16.0),
-                      color: Colors.amber),
+                      color: Colors.deepOrange),
                   padding: EdgeInsets.all(12),
                   child: Icon(
                     Icons.date_range_outlined,
@@ -195,6 +203,9 @@ class _AddTransactionState extends State<AddTransaction> {
                   child: Text("${selectedDate.day} / ${selectedDate.month}")),
             ],
           ),
+          SizedBox(
+            height: 20,
+          ),
           ElevatedButton(
               onPressed: () async {
                 if (amount != null && note.isNotEmpty) {
@@ -206,11 +217,15 @@ class _AddTransactionState extends State<AddTransaction> {
                 }
               },
               child: Text("Add")),
+          SizedBox(
+            height: 10,
+          ),
           ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red[700]),
               onPressed: () {
                 DbHelper dbHelper = new DbHelper();
                 dbHelper.deleteAll();
+                Navigator.pop(context);
               },
               child: Text("Delete All Data")),
         ],

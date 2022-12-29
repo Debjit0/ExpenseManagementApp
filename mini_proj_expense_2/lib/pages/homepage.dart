@@ -1,10 +1,6 @@
-import 'dart:ffi';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_proj_expense_2/controllers/db_helper.dart';
 import 'package:mini_proj_expense_2/pages/addTransaction.dart';
 
@@ -64,6 +60,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(24, 24, 24, 1.0),
       appBar: AppBar(toolbarHeight: 0.0),
       body: FutureBuilder<Map>(
         future: dbHelper.fetch(),
@@ -75,7 +72,10 @@ class _HomePageState extends State<HomePage> {
           } else if (snapshot.hasData) {
             if (snapshot.data!.isEmpty) {
               return Center(
-                child: Text("No Values Found"),
+                child: Text(
+                  "Press '+' to add values",
+                  style: GoogleFonts.lato(color: Colors.grey, fontSize: 18),
+                ),
               );
             } else {
               getTotalBalance(snapshot.data!);
