@@ -24,4 +24,8 @@ class DbHelper {
       return Future.value(box.toMap());
     }
   }
+
+  deleteAll() {
+    Hive.box('money').clear();
+  }
 }

@@ -205,7 +205,14 @@ class _AddTransactionState extends State<AddTransaction> {
                   print("Not all Values provided");
                 }
               },
-              child: Text("Add"))
+              child: Text("Add")),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.red[700]),
+              onPressed: () {
+                DbHelper dbHelper = new DbHelper();
+                dbHelper.deleteAll();
+              },
+              child: Text("Delete All Data")),
         ],
       ),
     );
