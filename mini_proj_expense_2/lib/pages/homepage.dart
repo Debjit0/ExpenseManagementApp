@@ -463,12 +463,12 @@ class _HomePageState extends State<HomePage> {
         children: [
           Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.arrow_circle_down_rounded,
                 size: 28,
                 color: Colors.green,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 4.0,
               ),
               Text(
