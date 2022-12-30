@@ -12,7 +12,7 @@ class AddTransaction extends StatefulWidget {
 
 class _AddTransactionState extends State<AddTransaction> {
   int? amount;
-  String note = "Some Expense";
+  String note = "No info";
   String type = "Income";
   DateTime selectedDate = DateTime.now();
   List<String> months = [
@@ -50,12 +50,22 @@ class _AddTransactionState extends State<AddTransaction> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
-          Text("Add Transactions",
-              textAlign: TextAlign.center,
-              style: GoogleFonts.lato(
-                  color: Colors.grey,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold)),
+          Row(
+            children: [
+              Text("Add Transactions",
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.lato(
+                      color: Colors.grey,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold)),
+              Text(".",
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.lato(
+                      color: Colors.deepPurple,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold)),
+            ],
+          ),
           SizedBox(
             height: 20,
           ),
@@ -63,12 +73,25 @@ class _AddTransactionState extends State<AddTransaction> {
             children: [
               Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      color: Colors.deepOrange),
+                    color: Color.fromARGB(255, 23, 23, 23),
+                    boxShadow: [
+                      new BoxShadow(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        blurRadius: 20.0,
+                        offset: Offset(6, 6),
+                      ),
+                      new BoxShadow(
+                        color: Color.fromARGB(255, 36, 36, 36),
+                        blurRadius: 20.0,
+                        offset: Offset(-6, -6),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.all(Radius.circular(24)),
+                  ),
                   padding: EdgeInsets.all(12),
                   child: Icon(
                     Icons.attach_money,
-                    //color: Colors.white,//change icon color here
+                    color: Colors.green, //change icon color here
                   )),
               SizedBox(
                 width: 12,
@@ -100,12 +123,25 @@ class _AddTransactionState extends State<AddTransaction> {
             children: [
               Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      color: Colors.deepOrange),
+                    color: Color.fromARGB(255, 23, 23, 23),
+                    boxShadow: [
+                      new BoxShadow(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        blurRadius: 20.0,
+                        offset: Offset(6, 6),
+                      ),
+                      new BoxShadow(
+                        color: Color.fromARGB(255, 36, 36, 36),
+                        blurRadius: 20.0,
+                        offset: Offset(-6, -6),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.all(Radius.circular(24)),
+                  ),
                   padding: EdgeInsets.all(12),
                   child: Icon(
                     Icons.description,
-                    //color: Colors.white,//change icon color here
+                    color: Colors.amber, //change icon color here
                   )),
               SizedBox(
                 width: 12,
@@ -120,7 +156,7 @@ class _AddTransactionState extends State<AddTransaction> {
                   onChanged: (val) {
                     note = val;
                   },
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(fontSize: 24, color: Colors.grey),
                   //inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   //keyboardType: TextInputType.number,
                   //maxLength: 24,
@@ -135,18 +171,31 @@ class _AddTransactionState extends State<AddTransaction> {
             children: [
               Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      color: Colors.deepOrange),
+                    color: Color.fromARGB(255, 23, 23, 23),
+                    boxShadow: [
+                      new BoxShadow(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        blurRadius: 20.0,
+                        offset: Offset(6, 6),
+                      ),
+                      new BoxShadow(
+                        color: Color.fromARGB(255, 36, 36, 36),
+                        blurRadius: 20.0,
+                        offset: Offset(-6, -6),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.all(Radius.circular(24)),
+                  ),
                   padding: EdgeInsets.all(12),
                   child: Icon(
                     Icons.moving_sharp,
-                    //color: Colors.white,//change icon color here
+                    color: Colors.deepPurple, //change icon color here
                   )),
               SizedBox(
                 width: 12,
               ),
               ChoiceChip(
-                selectedColor: Colors.deepOrange,
+                selectedColor: Colors.deepPurple,
                 label: Text(
                   "Income",
                   style: TextStyle(
@@ -165,7 +214,7 @@ class _AddTransactionState extends State<AddTransaction> {
                 width: 12,
               ),
               ChoiceChip(
-                selectedColor: Colors.deepOrange,
+                selectedColor: Colors.deepPurple,
                 label: Text(
                   "Expense",
                   style: TextStyle(
@@ -189,18 +238,34 @@ class _AddTransactionState extends State<AddTransaction> {
             children: [
               Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      color: Colors.deepOrange),
+                    color: Color.fromARGB(255, 23, 23, 23),
+                    boxShadow: [
+                      new BoxShadow(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        blurRadius: 20.0,
+                        offset: Offset(6, 6),
+                      ),
+                      new BoxShadow(
+                        color: Color.fromARGB(255, 36, 36, 36),
+                        blurRadius: 20.0,
+                        offset: Offset(-6, -6),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.all(Radius.circular(24)),
+                  ),
                   padding: EdgeInsets.all(12),
                   child: Icon(
                     Icons.date_range_outlined,
-                    //color: Colors.white,//change icon color here
+                    color: Colors.blueAccent, //change icon color here
                   )),
               TextButton(
                   onPressed: () {
                     _selectDate(context);
                   },
-                  child: Text("${selectedDate.day} / ${selectedDate.month}")),
+                  child: Text(
+                    "${selectedDate.day} / ${selectedDate.month}",
+                    style: TextStyle(color: Colors.blueAccent),
+                  )),
             ],
           ),
           SizedBox(
@@ -221,7 +286,7 @@ class _AddTransactionState extends State<AddTransaction> {
             height: 10,
           ),
           ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.red[700]),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.red[900]),
               onPressed: () {
                 DbHelper dbHelper = new DbHelper();
                 dbHelper.deleteAll();

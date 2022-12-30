@@ -75,9 +75,27 @@ class _HomePageState extends State<HomePage> {
           } else if (snapshot.hasData) {
             if (snapshot.data!.isEmpty) {
               return Center(
-                child: Text(
-                  "Press '+' to add values",
-                  style: GoogleFonts.lato(color: Colors.grey, fontSize: 18),
+                child: Container(
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(5, 5),
+                        color: Colors.black,
+                        blurRadius: 20,
+                      ),
+                      BoxShadow(
+                          offset: Offset(-4, -4),
+                          color: Color.fromARGB(255, 49, 49, 49),
+                          blurRadius: 20)
+                    ],
+                    color: Color.fromARGB(255, 45, 45, 45),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    "Press '+' to add values",
+                    style: GoogleFonts.lato(color: Colors.grey, fontSize: 18),
+                  ),
                 ),
               );
             } else {
@@ -105,11 +123,11 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Container(
                                   child: Text(
-                                    "..!",
+                                    ".",
                                     style: GoogleFonts.roboto(
                                         fontSize: 32,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.orange),
+                                        color: Colors.deepPurple),
                                   ),
                                 ),
                               ],
@@ -121,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12)),
                           child: Icon(
-                            color: Colors.deepOrange,
+                            color: Colors.deepPurple,
                             size: 32,
                             Icons.settings,
                           ),
@@ -258,7 +276,7 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(12, 12, 0, 12),
                         child: Text(
-                          "Recent Expense",
+                          "Recent",
                           style: GoogleFonts.roboto(
                               fontSize: 32,
                               color: Colors.grey,
@@ -268,16 +286,17 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, 12, 12, 12),
                         child: Text(
-                          "..!",
+                          ".",
                           style: GoogleFonts.roboto(
                               fontSize: 32,
-                              color: Colors.orange,
+                              color: Colors.deepPurple,
                               fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
                   ),
                   ListView.builder(
+                      reverse: true,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: snapshot.data!.length,
