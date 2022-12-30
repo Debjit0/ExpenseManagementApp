@@ -1,8 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:mini_proj_expense_2/controllers/db_helper.dart';
 import 'package:mini_proj_expense_2/pages/addTransaction.dart';
+import 'package:mini_proj_expense_2/pages/allExpense.dart';
+import 'package:mini_proj_expense_2/pages/allIncome.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -282,10 +285,16 @@ class _HomePageState extends State<HomePage> {
                         Map dataAtIndex = snapshot.data![index];
                         if (dataAtIndex['type'] == 'Income')
                           return incomeTile(
-                              dataAtIndex['amount'], dataAtIndex['note']);
+                              dataAtIndex['amount'],
+                              dataAtIndex['note'],
+                              dataAtIndex['date'],
+                              dataAtIndex['type']);
                         else
                           return expenseTile(
-                              dataAtIndex['amount'], dataAtIndex['note']);
+                              dataAtIndex['amount'],
+                              dataAtIndex['note'],
+                              dataAtIndex['date'],
+                              dataAtIndex['type']);
                       })
                 ],
               );
@@ -315,111 +324,135 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget cardIncome(String value) {
-    return Row(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                offset: Offset(5, 5),
-                color: Colors.black,
-                blurRadius: 20,
+    return InkWell(
+      onTap: (() {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (_) => allIncome()));
+      }),
+      child: Row(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(5, 5),
+                  color: Colors.black,
+                  blurRadius: 20,
+                ),
+                BoxShadow(
+                    offset: Offset(-4, -4),
+                    color: Color.fromARGB(255, 49, 49, 49),
+                    blurRadius: 20)
+              ],
+              color: Color.fromARGB(255, 45, 45, 45),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            padding: EdgeInsets.all(6),
+            child: Icon(
+              Icons.arrow_downward,
+              size: 28,
+              color: Colors.green,
+            ),
+            margin: EdgeInsets.only(right: 8),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Income",
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
               ),
-              BoxShadow(
-                  offset: Offset(-4, -4),
-                  color: Color.fromARGB(255, 49, 49, 49),
-                  blurRadius: 20)
+              Text(
+                value,
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
             ],
-            color: Color.fromARGB(255, 45, 45, 45),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          padding: EdgeInsets.all(6),
-          child: Icon(
-            Icons.arrow_downward,
-            size: 28,
-            color: Colors.green,
-          ),
-          margin: EdgeInsets.only(right: 8),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Income",
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            ),
-            Text(
-              value,
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            ),
-          ],
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 
   Widget cardExpense(String value) {
-    return Row(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              "Expense",
-              style: GoogleFonts.roboto(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            ),
-            Text(
-              value,
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-        Container(
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                offset: Offset(5, 5),
-                color: Colors.black,
-                blurRadius: 20,
+    return InkWell(
+      onTap: (() {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (_) => AllExpense()));
+      }),
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                "Expense",
+                style: GoogleFonts.roboto(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
               ),
-              BoxShadow(
-                  offset: Offset(-4, -4),
-                  color: Color.fromARGB(255, 49, 49, 49),
-                  blurRadius: 20)
+              Text(
+                value,
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
             ],
-            color: Color.fromARGB(255, 45, 45, 45),
-            borderRadius: BorderRadius.circular(20),
           ),
-          padding: EdgeInsets.all(6),
-          child: Icon(
-            Icons.arrow_upward,
-            size: 28,
-            color: Colors.red,
+          Container(
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(5, 5),
+                  color: Colors.black,
+                  blurRadius: 20,
+                ),
+                BoxShadow(
+                    offset: Offset(-4, -4),
+                    color: Color.fromARGB(255, 49, 49, 49),
+                    blurRadius: 20)
+              ],
+              color: Color.fromARGB(255, 45, 45, 45),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            padding: EdgeInsets.all(6),
+            child: Icon(
+              Icons.arrow_upward,
+              size: 28,
+              color: Colors.red,
+            ),
+            margin: EdgeInsets.only(left: 8),
           ),
-          margin: EdgeInsets.only(left: 8),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
-  Widget expenseTile(int value, String note) {
+  Widget expenseTile(int value, String note, DateTime date, String type) {
+    String formattedDate = DateFormat.yMMMd().format(date);
     return Container(
-      margin: EdgeInsets.all(8),
+      margin: EdgeInsets.fromLTRB(8, 12, 8, 12),
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: Color(0xffced4eb),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(5, 5),
+            color: Colors.black,
+            blurRadius: 20,
+          ),
+          BoxShadow(
+              offset: Offset(-4, -4),
+              color: Color.fromARGB(255, 49, 49, 49),
+              blurRadius: 20)
+        ],
+        color: Color.fromRGBO(24, 24, 24, 1.0),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -437,26 +470,52 @@ class _HomePageState extends State<HomePage> {
               ),
               Text(
                 "$note",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(
+                "$formattedDate",
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.normal),
               ),
             ],
           ),
           Text(
             "-$value",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red),
           )
         ],
       ),
     );
   }
 
-  Widget incomeTile(int value, String note) {
+  Widget incomeTile(int value, String note, DateTime date, String type) {
+    String formattedDate = DateFormat.yMMMd().format(date);
     return Container(
-      margin: EdgeInsets.all(8),
+      margin: EdgeInsets.fromLTRB(8, 12, 8, 12),
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: Color(0xffced4eb),
+        color: Color.fromRGBO(24, 24, 24, 1.0),
         borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(5, 5),
+            color: Colors.black,
+            blurRadius: 10,
+          ),
+          BoxShadow(
+              offset: Offset(-4, -4),
+              color: Color.fromARGB(255, 49, 49, 49),
+              blurRadius: 20)
+        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -473,13 +532,27 @@ class _HomePageState extends State<HomePage> {
               ),
               Text(
                 "$note",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(
+                "$formattedDate",
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.normal),
               ),
             ],
           ),
           Text(
             "+$value",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green),
           )
         ],
       ),
