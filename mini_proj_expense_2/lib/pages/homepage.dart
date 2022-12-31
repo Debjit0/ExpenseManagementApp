@@ -6,6 +6,7 @@ import 'package:mini_proj_expense_2/controllers/db_helper.dart';
 import 'package:mini_proj_expense_2/pages/addTransaction.dart';
 import 'package:mini_proj_expense_2/pages/allExpense.dart';
 import 'package:mini_proj_expense_2/pages/allIncome.dart';
+import 'package:mini_proj_expense_2/pages/cardManager.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -134,14 +135,34 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
-                        Container(
-                          padding: EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Icon(
-                            color: Colors.deepPurple,
-                            size: 32,
-                            Icons.settings,
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => CardManager()));
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: Offset(5, 5),
+                                  color: Colors.black,
+                                  blurRadius: 20,
+                                ),
+                                BoxShadow(
+                                    offset: Offset(-4, -4),
+                                    color: Color.fromARGB(255, 49, 49, 49),
+                                    blurRadius: 20)
+                              ],
+                              color: Color.fromARGB(255, 45, 45, 45),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            padding: EdgeInsets.all(8),
+                            child: Icon(
+                              Icons.credit_card,
+                              size: 28,
+                              color: Colors.deepPurple,
+                            ),
+                            margin: EdgeInsets.only(right: 8),
                           ),
                         ),
                       ],
