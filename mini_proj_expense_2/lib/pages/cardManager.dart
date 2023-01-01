@@ -10,6 +10,6 @@ class CardManager extends StatefulWidget {
 class _CardManagerState extends State<CardManager> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 }
