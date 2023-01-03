@@ -14,7 +14,7 @@ class _AddCardState extends State<AddCard> {
   String bankname = "Not Mentioned";
   String? exp;
   String cvv = "Not Mentioned";
-  String? Type;
+  String Type = "Master";
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(toolbarHeight: 0.0),
@@ -87,7 +87,7 @@ class _AddCardState extends State<AddCard> {
             ],
           ),
           SizedBox(
-            width: 12,
+            height: 12,
           ),
           Row(
             children: [
@@ -136,6 +136,117 @@ class _AddCardState extends State<AddCard> {
               ),
             ],
           ),
+          SizedBox(
+            height: 12,
+          ),
+          Row(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 23, 23, 23),
+                    boxShadow: [
+                      new BoxShadow(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        blurRadius: 20.0,
+                        offset: Offset(6, 6),
+                      ),
+                      new BoxShadow(
+                        color: Color.fromARGB(255, 36, 36, 36),
+                        blurRadius: 20.0,
+                        offset: Offset(-6, -6),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.all(Radius.circular(24)),
+                  ),
+                  padding: EdgeInsets.all(12),
+                  child: Icon(
+                    Icons.lock,
+                    color: Colors.deepPurple, //change icon color here
+                  )),
+              SizedBox(
+                width: 12,
+              ),
+              Expanded(
+                child: TextField(
+                  decoration: InputDecoration(
+                    //fillColor: Colors.grey,
+                    hintText: "CVV",
+                    hintStyle: TextStyle(color: Colors.grey),
+                    border: InputBorder.none,
+                  ),
+                  onChanged: (val) {
+                    try {
+                      cardno = int.parse(val);
+                    } catch (e) {}
+                  },
+                  style: TextStyle(fontSize: 24, color: Colors.grey),
+                  //inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  keyboardType: TextInputType.number,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Row(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 23, 23, 23),
+                    boxShadow: [
+                      new BoxShadow(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        blurRadius: 20.0,
+                        offset: Offset(6, 6),
+                      ),
+                      new BoxShadow(
+                        color: Color.fromARGB(255, 36, 36, 36),
+                        blurRadius: 20.0,
+                        offset: Offset(-6, -6),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.all(Radius.circular(24)),
+                  ),
+                  padding: EdgeInsets.all(12),
+                  child: Icon(
+                    Icons.calendar_month,
+                    color: Colors.deepOrange, //change icon color here
+                  )),
+              SizedBox(
+                width: 12,
+              ),
+              Expanded(
+                child: TextField(
+                  decoration: InputDecoration(
+                    //fillColor: Colors.grey,
+                    hintText: "Exp Date",
+                    hintStyle: TextStyle(color: Colors.grey),
+                    border: InputBorder.none,
+                  ),
+                  onChanged: (val) {
+                    try {
+                      cardno = int.parse(val);
+                    } catch (e) {}
+                  },
+                  style: TextStyle(fontSize: 24, color: Colors.grey),
+                  //inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  keyboardType: TextInputType.number,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          ElevatedButton(onPressed: () {}, child: Text("Add")),
+          SizedBox(
+            height: 12,
+          ),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.red[900]),
+              onPressed: () {},
+              child: Text("Delete All"))
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mini_proj_expense_2/pages/addCard.dart';
+import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 class CardManager extends StatefulWidget {
   const CardManager({super.key});
@@ -13,6 +14,7 @@ class _CardManagerState extends State<CardManager> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(24, 24, 24, 1.0),
+      body: ListView(),
       floatingActionButton: FloatingActionButton(
         onPressed: (() {
           Navigator.of(context)
