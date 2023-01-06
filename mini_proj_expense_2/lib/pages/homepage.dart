@@ -47,10 +47,10 @@ class _HomePageState extends State<HomePage> {
     totalIncome = 0;
     totalBalance = 0;
     entireData.forEach((key, value) {
-      print(value);
-      print("Total Balance $totalBalance");
-      print("Total Expense $totalExpense");
-      print("Total Income $totalIncome");
+      //print(value);
+      //print("Total Balance $totalBalance");
+      //print("Total Expense $totalExpense");
+      //print("Total Income $totalIncome");
       if (value['type'] == 'Income') {
         totalBalance += (value['amount'] as int);
         totalIncome += (value['amount'] as int);
