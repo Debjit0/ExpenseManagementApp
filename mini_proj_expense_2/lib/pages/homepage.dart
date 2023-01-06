@@ -552,6 +552,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 print("expense tile");
                 await dbHelper.deleteOne(index);
+                dbHelper.addData(0, DateTime.now(), "", "");
                 setState(() {});
               },
               icon: Icon(Icons.delete))
@@ -623,6 +624,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 print("Income tile");
                 await dbHelper.deleteOne(index);
+                dbHelper.addData(0, DateTime.now(), "", "");
                 setState(() {});
               },
               icon: Icon(Icons.delete))
