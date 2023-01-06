@@ -28,4 +28,14 @@ class DbHelper {
   deleteAll() {
     Hive.box('money').clear();
   }
+
+  deleteOne(int index) async {
+    //box.compact();
+    await box.delete(index);
+    await box.compact();
+  }
+
+  compactAll() async {
+    await box.compact();
+  }
 }

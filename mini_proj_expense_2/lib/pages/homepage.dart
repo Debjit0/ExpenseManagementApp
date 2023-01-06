@@ -322,26 +322,40 @@ class _HomePageState extends State<HomePage> {
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        Map dataAtIndex = snapshot.data![index];
-                        if (dataAtIndex['type'] == 'Income')
-                          return incomeTile(
+                        dbHelper.compactAll();
+                        Map dataAtIndex;
+                        try {
+                          dataAtIndex = snapshot.data![index];
+                        } catch (e) {
+                          return Container();
+                        }
+                        //DateTime date1=dataAtIndex['date'];
+                        if (dataAtIndex['date'].month == today.month) {
+                          if (dataAtIndex['type'] == 'Income')
+                            return incomeTile(
+                                dataAtIndex['amount'],
+                                dataAtIndex['note'],
+                                dataAtIndex['date'],
+                                dataAtIndex['type'],
+                                index);
+                          else
+                            return expenseTile(
                               dataAtIndex['amount'],
                               dataAtIndex['note'],
                               dataAtIndex['date'],
-                              dataAtIndex['type']);
-                        else
-                          return expenseTile(
-                              dataAtIndex['amount'],
-                              dataAtIndex['note'],
-                              dataAtIndex['date'],
-                              dataAtIndex['type']);
+                              dataAtIndex['type'],
+                              index,
+                            );
+                        } else {
+                          return Container();
+                        }
                       })
                 ],
               );
             }
           } else {
             return Center(
-              child: Text("Unexpected Error"),
+              child: Text("Loading"),
             );
           }
         },
@@ -475,7 +489,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget expenseTile(int value, String note, DateTime date, String type) {
+  Widget expenseTile(
+      int value, String note, DateTime date, String type, int index) {
+    print("index $index");
     String formattedDate = DateFormat.yMMMd().format(date);
     return Container(
       margin: EdgeInsets.fromLTRB(8, 12, 8, 12),
@@ -531,13 +547,22 @@ class _HomePageState extends State<HomePage> {
             "-$value",
             style: TextStyle(
                 fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red),
-          )
+          ),
+          IconButton(
+              onPressed: () async {
+                print("expense tile");
+                await dbHelper.deleteOne(index);
+                setState(() {});
+              },
+              icon: Icon(Icons.delete))
         ],
       ),
     );
   }
 
-  Widget incomeTile(int value, String note, DateTime date, String type) {
+  Widget incomeTile(
+      int value, String note, DateTime date, String type, int index) {
+    print("index $index");
     String formattedDate = DateFormat.yMMMd().format(date);
     return Container(
       margin: EdgeInsets.fromLTRB(8, 12, 8, 12),
@@ -593,7 +618,14 @@ class _HomePageState extends State<HomePage> {
             "+$value",
             style: TextStyle(
                 fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green),
-          )
+          ),
+          IconButton(
+              onPressed: () async {
+                print("Income tile");
+                await dbHelper.deleteOne(index);
+                setState(() {});
+              },
+              icon: Icon(Icons.delete))
         ],
       ),
     );
