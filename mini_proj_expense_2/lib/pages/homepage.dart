@@ -320,7 +320,7 @@ class _HomePageState extends State<HomePage> {
                       reverse: true,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: snapshot.data!.length,
+                      itemCount: snapshot.data!.length + 1,
                       itemBuilder: (context, index) {
                         dbHelper.compactAll();
                         Map dataAtIndex;
@@ -330,7 +330,7 @@ class _HomePageState extends State<HomePage> {
                           return Container();
                         }
                         //DateTime date1=dataAtIndex['date'];
-                        if (dataAtIndex['date'].month == today.month) {
+                        if (dataAtIndex['amount'] != 0) {
                           if (dataAtIndex['type'] == 'Income')
                             return incomeTile(
                                 dataAtIndex['amount'],
@@ -552,6 +552,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 print("expense tile");
                 await dbHelper.deleteOne(index);
+                //dbHelper.addData(0, DateTime.now(), "", "");
                 dbHelper.addData(0, DateTime.now(), "", "");
                 setState(() {});
               },
@@ -624,6 +625,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 print("Income tile");
                 await dbHelper.deleteOne(index);
+                //dbHelper.addData(0, DateTime.now(), "", "");
                 dbHelper.addData(0, DateTime.now(), "", "");
                 setState(() {});
               },
