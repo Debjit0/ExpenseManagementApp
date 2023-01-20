@@ -63,22 +63,33 @@ class _AllExpenseState extends State<AllExpense> {
                           ),
                         ),
                         ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, index) {
-                            Map dataAtIndex = snapshot.data![index];
-                            if (dataAtIndex['type'] == 'Expense') {
-                              return expenseTile(
-                                  dataAtIndex['amount'],
-                                  dataAtIndex['note'],
-                                  dataAtIndex['date'],
-                                  dataAtIndex['type']);
-                            } else {
-                              return SizedBox();
-                            }
-                          },
-                        ),
+                            reverse: true,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: snapshot.data!.length + 1,
+                            itemBuilder: (context, index) {
+                              dbHelper.compactAll();
+                              Map dataAtIndex;
+                              try {
+                                dataAtIndex = snapshot.data![index];
+                              } catch (e) {
+                                return Container();
+                              }
+                              //DateTime date1=dataAtIndex['date'];
+                              if (dataAtIndex['amount'] != 0) {
+                                if (dataAtIndex['type'] == 'Expense')
+                                  return expenseTile(
+                                    dataAtIndex['amount'],
+                                    dataAtIndex['note'],
+                                    dataAtIndex['date'],
+                                    dataAtIndex['type'],
+                                  );
+                                else
+                                  return Container();
+                              } else {
+                                return Container();
+                              }
+                            })
                       ],
                     ));
               }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_proj_expense_2/controllers/db_helper.dart';
 
@@ -273,6 +274,13 @@ class _AddTransactionState extends State<AddTransaction> {
           ),
           ElevatedButton(
               onPressed: () async {
+                if (type == "Expense") {
+                  Fluttertoast.showToast(
+                      msg: "Expense Added", textColor: Colors.red);
+                } else if (type == "Income") {
+                  Fluttertoast.showToast(
+                      msg: "Income Added", textColor: Colors.green);
+                }
                 if (amount != null && note.isNotEmpty) {
                   DbHelper dbHelper = new DbHelper();
                   await dbHelper.addData(amount!, selectedDate, note, type);
@@ -288,6 +296,7 @@ class _AddTransactionState extends State<AddTransaction> {
           ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red[900]),
               onPressed: () {
+                Fluttertoast.showToast(msg: "All Data deleted");
                 DbHelper dbHelper = new DbHelper();
                 dbHelper.deleteAll();
                 Navigator.pop(context);
