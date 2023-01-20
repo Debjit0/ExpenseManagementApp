@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_proj_expense_2/controllers/db_helper.dart';
+import 'package:mini_proj_expense_2/pages/homepage.dart';
 
 class AddTransaction extends StatefulWidget {
   const AddTransaction({super.key});
@@ -275,11 +276,23 @@ class _AddTransactionState extends State<AddTransaction> {
           ElevatedButton(
               onPressed: () async {
                 if (type == "Expense") {
-                  Fluttertoast.showToast(
-                      msg: "Expense Added", textColor: Colors.red);
+                  if (amount == null || amount == 0) {
+                    Fluttertoast.showToast(
+                        msg: "Enter valid data", textColor: Colors.green);
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: "Income Added", textColor: Colors.green);
+                  }
                 } else if (type == "Income") {
-                  Fluttertoast.showToast(
-                      msg: "Income Added", textColor: Colors.green);
+                  if (amount == null || amount == 0) {
+                    Fluttertoast.showToast(
+                      msg: "Enter valid data",
+                      textColor: Colors.green,
+                    );
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: "Income Added", textColor: Colors.green);
+                  }
                 }
                 if (amount != null && note.isNotEmpty) {
                   DbHelper dbHelper = new DbHelper();
@@ -296,10 +309,33 @@ class _AddTransactionState extends State<AddTransaction> {
           ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red[900]),
               onPressed: () {
-                Fluttertoast.showToast(msg: "All Data deleted");
+                showDialog(
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                          title: Text("Are you sure?"),
+                          content: Text("This Will delete all the records."),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Cancel")),
+                            TextButton(
+                                onPressed: () {
+                                  Fluttertoast.showToast(
+                                      msg: "All Data deleted");
+                                  DbHelper dbHelper = new DbHelper();
+                                  dbHelper.deleteAll();
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => HomePage()));
+                                },
+                                child: Text("Yes")),
+                          ],
+                        ));
+                /*Fluttertoast.showToast(msg: "All Data deleted");
                 DbHelper dbHelper = new DbHelper();
                 dbHelper.deleteAll();
-                Navigator.pop(context);
+                Navigator.pop(context);*/
               },
               child: Text("Delete All Data")),
         ],
