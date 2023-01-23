@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mini_proj_expense_2/controllers/carddb_helper.dart';
+import 'package:mini_proj_expense_2/controllers/db_helper.dart';
 
 class AddCard extends StatefulWidget {
   const AddCard({super.key});
@@ -10,11 +12,11 @@ class AddCard extends StatefulWidget {
 
 class _AddCardState extends State<AddCard> {
   @override
-  int? cardno;
+  String cardno = "1111 1111 1111 1111";
   String bankname = "Not Mentioned";
-  String? exp;
+  String exp = "111";
   String cvv = "Not Mentioned";
-  String Type = "Master";
+  String type = "Master";
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(toolbarHeight: 0.0),
@@ -126,7 +128,7 @@ class _AddCardState extends State<AddCard> {
                   ),
                   onChanged: (val) {
                     try {
-                      cardno = int.parse(val);
+                      cardno = val;
                     } catch (e) {}
                   },
                   style: TextStyle(fontSize: 24, color: Colors.grey),
@@ -176,7 +178,7 @@ class _AddCardState extends State<AddCard> {
                   ),
                   onChanged: (val) {
                     try {
-                      cardno = int.parse(val);
+                      cardno = val;
                     } catch (e) {}
                   },
                   style: TextStyle(fontSize: 24, color: Colors.grey),
@@ -226,7 +228,7 @@ class _AddCardState extends State<AddCard> {
                   ),
                   onChanged: (val) {
                     try {
-                      cardno = int.parse(val);
+                      cardno = val;
                     } catch (e) {}
                   },
                   style: TextStyle(fontSize: 24, color: Colors.grey),
@@ -239,7 +241,15 @@ class _AddCardState extends State<AddCard> {
           SizedBox(
             height: 12,
           ),
-          ElevatedButton(onPressed: () {}, child: Text("Add")),
+          ElevatedButton(
+              onPressed: () async {
+                if (cardno != null || cvv != null) {
+                  CardDbHelper cardDbHelper = new CardDbHelper();
+                  await cardDbHelper.addData(cardno, cvv, exp, type, bankname);
+                  Navigator.of(context).pop();
+                }
+              },
+              child: Text("Add")),
           SizedBox(
             height: 12,
           ),

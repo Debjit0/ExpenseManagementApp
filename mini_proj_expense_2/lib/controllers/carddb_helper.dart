@@ -11,8 +11,8 @@ class CardDbHelper {
     box = Hive.box('card');
   }
 
-  Future addData(
-      int cardno, int cvv, String exp, String type, String bankname) async {
+  Future addData(String cardno, String cvv, String exp, String type,
+      String bankname) async {
     var value = {
       'cardno': cardno,
       'cvv': cvv,
@@ -33,5 +33,9 @@ class CardDbHelper {
 
   deleteAll() {
     Hive.box('card').clear();
+  }
+
+  compactAll() async {
+    await box.compact();
   }
 }
