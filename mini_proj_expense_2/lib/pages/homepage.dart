@@ -321,15 +321,16 @@ class _HomePageState extends State<HomePage> {
                       reverse: true,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: snapshot.data!.length + 1,
+                      itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        dbHelper.compactAll();
+                        //dbHelper.compactAll();
                         Map dataAtIndex;
                         try {
                           dataAtIndex = snapshot.data![index];
                         } catch (e) {
                           return Container();
                         }
+                        
                         //DateTime date1=dataAtIndex['date'];
                         if (dataAtIndex['amount'] != 0) {
                           if (dataAtIndex['type'] == 'Income')
