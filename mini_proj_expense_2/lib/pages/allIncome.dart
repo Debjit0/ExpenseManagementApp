@@ -16,7 +16,7 @@ class _allIncomeState extends State<allIncome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(24, 24, 24, 1.0),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: SafeArea(
         child: FutureBuilder(
           future: dbHelper.fetch(),
@@ -30,7 +30,8 @@ class _allIncomeState extends State<allIncome> {
                 return Center(
                   child: Text(
                     "Press '+' to add values",
-                    style: GoogleFonts.lato(color: Colors.grey, fontSize: 18),
+                    style: GoogleFonts.lato(
+                        color: Color.fromARGB(255, 0, 0, 0), fontSize: 18),
                   ),
                 );
               } else {
@@ -47,7 +48,7 @@ class _allIncomeState extends State<allIncome> {
                                 style: GoogleFonts.roboto(
                                     fontSize: 32,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.grey),
+                                    color: Color.fromARGB(255, 0, 0, 0)),
                               ),
                               Container(
                                 child: Text(
@@ -110,18 +111,14 @@ class _allIncomeState extends State<allIncome> {
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
         boxShadow: [
-          BoxShadow(
-            offset: Offset(5, 5),
-            color: Colors.black,
-            blurRadius: 20,
+          new BoxShadow(
+            color: Color.fromARGB(255, 137, 137, 137),
+            blurRadius: 20.0,
+            offset: Offset(6, 6),
           ),
-          BoxShadow(
-              offset: Offset(-4, -4),
-              color: Color.fromARGB(255, 49, 49, 49),
-              blurRadius: 20)
         ],
-        color: Color.fromRGBO(24, 24, 24, 1.0),
-        borderRadius: BorderRadius.circular(8),
+        color: Color.fromARGB(255, 255, 255, 255),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -140,7 +137,7 @@ class _allIncomeState extends State<allIncome> {
                 "$note",
                 style: TextStyle(
                     fontSize: 20,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 0, 0, 0),
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(
@@ -171,18 +168,14 @@ class _allIncomeState extends State<allIncome> {
       margin: EdgeInsets.fromLTRB(8, 12, 8, 12),
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: Color.fromRGBO(24, 24, 24, 1.0),
-        borderRadius: BorderRadius.circular(8),
+        color: Color.fromARGB(255, 255, 255, 255),
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [
-          BoxShadow(
-            offset: Offset(5, 5),
-            color: Colors.black,
-            blurRadius: 10,
+          new BoxShadow(
+            color: Color.fromARGB(255, 137, 137, 137),
+            blurRadius: 20.0,
+            offset: Offset(6, 6),
           ),
-          BoxShadow(
-              offset: Offset(-4, -4),
-              color: Color.fromARGB(255, 49, 49, 49),
-              blurRadius: 20)
         ],
       ),
       child: Row(
@@ -202,7 +195,7 @@ class _allIncomeState extends State<allIncome> {
                 "$note",
                 style: TextStyle(
                     fontSize: 20,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 0, 0, 0),
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(

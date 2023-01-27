@@ -47,7 +47,7 @@ class _AddTransactionState extends State<AddTransaction> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(24, 24, 24, 1.0),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(toolbarHeight: 0.0),
       body: ListView(
         padding: EdgeInsets.all(20),
@@ -57,7 +57,7 @@ class _AddTransactionState extends State<AddTransaction> {
               Text("Add Transactions",
                   textAlign: TextAlign.left,
                   style: GoogleFonts.lato(
-                      color: Colors.grey,
+                      color: Color.fromARGB(255, 0, 0, 0),
                       fontSize: 32,
                       fontWeight: FontWeight.bold)),
               Text(".",
@@ -78,14 +78,9 @@ class _AddTransactionState extends State<AddTransaction> {
                     color: Color.fromARGB(255, 23, 23, 23),
                     boxShadow: [
                       new BoxShadow(
-                        color: Color.fromARGB(255, 0, 0, 0),
+                        color: Color.fromARGB(255, 137, 137, 137),
                         blurRadius: 20.0,
                         offset: Offset(6, 6),
-                      ),
-                      new BoxShadow(
-                        color: Color.fromARGB(255, 36, 36, 36),
-                        blurRadius: 20.0,
-                        offset: Offset(-6, -6),
                       ),
                     ],
                     borderRadius: BorderRadius.all(Radius.circular(24)),
@@ -128,14 +123,9 @@ class _AddTransactionState extends State<AddTransaction> {
                     color: Color.fromARGB(255, 23, 23, 23),
                     boxShadow: [
                       new BoxShadow(
-                        color: Color.fromARGB(255, 0, 0, 0),
+                        color: Color.fromARGB(255, 137, 137, 137),
                         blurRadius: 20.0,
                         offset: Offset(6, 6),
-                      ),
-                      new BoxShadow(
-                        color: Color.fromARGB(255, 36, 36, 36),
-                        blurRadius: 20.0,
-                        offset: Offset(-6, -6),
                       ),
                     ],
                     borderRadius: BorderRadius.all(Radius.circular(24)),
@@ -176,14 +166,9 @@ class _AddTransactionState extends State<AddTransaction> {
                     color: Color.fromARGB(255, 23, 23, 23),
                     boxShadow: [
                       new BoxShadow(
-                        color: Color.fromARGB(255, 0, 0, 0),
+                        color: Color.fromARGB(255, 137, 137, 137),
                         blurRadius: 20.0,
                         offset: Offset(6, 6),
-                      ),
-                      new BoxShadow(
-                        color: Color.fromARGB(255, 36, 36, 36),
-                        blurRadius: 20.0,
-                        offset: Offset(-6, -6),
                       ),
                     ],
                     borderRadius: BorderRadius.all(Radius.circular(24)),
@@ -243,14 +228,9 @@ class _AddTransactionState extends State<AddTransaction> {
                     color: Color.fromARGB(255, 23, 23, 23),
                     boxShadow: [
                       new BoxShadow(
-                        color: Color.fromARGB(255, 0, 0, 0),
+                        color: Color.fromARGB(255, 137, 137, 137),
                         blurRadius: 20.0,
                         offset: Offset(6, 6),
-                      ),
-                      new BoxShadow(
-                        color: Color.fromARGB(255, 36, 36, 36),
-                        blurRadius: 20.0,
-                        offset: Offset(-6, -6),
                       ),
                     ],
                     borderRadius: BorderRadius.all(Radius.circular(24)),
