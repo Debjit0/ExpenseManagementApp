@@ -44,6 +44,7 @@ dependencies:
   intl: ^0.18.0
   flutter_credit_card: ^3.0.4
   awesome_card: ^1.1.7
+  shared_preferences: ^2.0.17
 
 dev_dependencies:
   flutter_test:

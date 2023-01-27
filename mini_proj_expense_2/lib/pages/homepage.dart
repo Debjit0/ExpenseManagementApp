@@ -7,6 +7,7 @@ import 'package:mini_proj_expense_2/pages/addTransaction.dart';
 import 'package:mini_proj_expense_2/pages/allExpense.dart';
 import 'package:mini_proj_expense_2/pages/allIncome.dart';
 import 'package:mini_proj_expense_2/pages/cardManager.dart';
+import 'package:mini_proj_expense_2/pages/search.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -137,8 +138,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => CardManager()));
+                            Navigator.of(context).push(
+                                MaterialPageRoute(builder: (_) => Search()));
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -158,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             padding: EdgeInsets.all(8),
                             child: Icon(
-                              Icons.credit_card,
+                              Icons.search,
                               size: 28,
                               color: Colors.deepPurple,
                             ),
