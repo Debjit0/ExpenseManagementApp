@@ -18,19 +18,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<Color> _gradientColors = [
-    const Color(0xFF6FFF7C),
-    const Color(0xFF0087FF),
-    const Color(0xFF5620FF),
-  ];
   DbHelper dbHelper = DbHelper();
   int totalBalance = 0;
   int totalIncome = 0;
   int totalExpense = 0;
   List<FlSpot> dataSet = [];
   DateTime today = DateTime.now();
-  double d1 = 0;
-  double d2 = 0;
 
   List<FlSpot> getPlotPoints(Map entireData) {
     dataSet = [];
@@ -68,6 +61,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         //toolbarHeight: 80,
         flexibleSpace: SafeArea(
           child: Row(
@@ -362,7 +356,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
-                  //
+                  //*//`
                   Row(
                     children: [
                       Padding(
