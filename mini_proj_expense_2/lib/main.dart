@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mini_proj_expense_2/pages/homepage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import './pages/splash.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: const HomePage(),
+      home: SplashScreen(),
     );
   }
 }

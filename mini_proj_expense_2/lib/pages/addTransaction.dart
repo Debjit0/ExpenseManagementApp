@@ -48,7 +48,9 @@ class _AddTransactionState extends State<AddTransaction> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
-      appBar: AppBar(toolbarHeight: 0.0),
+      appBar: AppBar(
+        toolbarHeight: 0.0,
+      ),
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
@@ -75,7 +77,7 @@ class _AddTransactionState extends State<AddTransaction> {
             children: [
               Container(
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 23, 23, 23),
+                    color: Color.fromARGB(255, 255, 255, 255),
                     boxShadow: [
                       new BoxShadow(
                         color: Color.fromARGB(255, 137, 137, 137),
@@ -87,7 +89,7 @@ class _AddTransactionState extends State<AddTransaction> {
                   ),
                   padding: EdgeInsets.all(12),
                   child: Icon(
-                    Icons.attach_money,
+                    Icons.currency_rupee_outlined,
                     color: Colors.green, //change icon color here
                   )),
               SizedBox(
@@ -120,7 +122,7 @@ class _AddTransactionState extends State<AddTransaction> {
             children: [
               Container(
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 23, 23, 23),
+                    color: Color.fromARGB(255, 255, 255, 255),
                     boxShadow: [
                       new BoxShadow(
                         color: Color.fromARGB(255, 137, 137, 137),
@@ -163,7 +165,7 @@ class _AddTransactionState extends State<AddTransaction> {
             children: [
               Container(
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 23, 23, 23),
+                    color: Color.fromARGB(255, 255, 255, 255),
                     boxShadow: [
                       new BoxShadow(
                         color: Color.fromARGB(255, 137, 137, 137),
@@ -225,7 +227,7 @@ class _AddTransactionState extends State<AddTransaction> {
             children: [
               Container(
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 23, 23, 23),
+                    color: Color.fromARGB(255, 255, 255, 255),
                     boxShadow: [
                       new BoxShadow(
                         color: Color.fromARGB(255, 137, 137, 137),

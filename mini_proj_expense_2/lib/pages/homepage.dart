@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:mini_proj_expense_2/controllers/db_helper.dart';
@@ -66,7 +67,82 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
-      appBar: AppBar(toolbarHeight: 0.0),
+      appBar: AppBar(
+        //toolbarHeight: 80,
+        flexibleSpace: SafeArea(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.fromLTRB(12, 0, 12, 0),
+                    //color: Colors.red,
+                    child: Row(
+                      children: [
+                        Container(
+                          child: Text(
+                            "A",
+                            style: GoogleFonts.roboto(
+                                fontSize: 42,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 255, 255, 255)),
+                          ),
+                        ),
+                        Container(
+                          child: Text(
+                            "rise",
+                            style: GoogleFonts.roboto(
+                                fontSize: 42,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 0, 0, 0)),
+                          ),
+                        ),
+                        Container(
+                          child: Text(
+                            ".",
+                            style: GoogleFonts.roboto(
+                                letterSpacing: 5,
+                                fontSize: 42,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.deepPurple),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) => Search()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      new BoxShadow(
+                        color: Color.fromARGB(255, 137, 137, 137),
+                        blurRadius: 20.0,
+                        offset: Offset(6, 6),
+                      ),
+                    ],
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  padding: EdgeInsets.all(8),
+                  child: Icon(
+                    Icons.search,
+                    size: 28,
+                    color: Colors.deepPurple,
+                  ),
+                  margin: EdgeInsets.only(right: 8),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       body: FutureBuilder<Map>(
         future: dbHelper.fetch(),
         builder: (context, snapshot) {
@@ -103,7 +179,8 @@ class _HomePageState extends State<HomePage> {
               return ListView(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                    /*
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -113,9 +190,18 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Container(
                                   child: Text(
-                                    "Hi There",
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 32,
+                                    "A",
+                                    style: GoogleFonts.pacifico(
+                                        fontSize: 42,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.deepPurple),
+                                  ),
+                                ),
+                                Container(
+                                  child: Text(
+                                    "rise",
+                                    style: GoogleFonts.pacifico(
+                                        fontSize: 42,
                                         fontWeight: FontWeight.bold,
                                         color: Color.fromARGB(255, 0, 0, 0)),
                                   ),
@@ -123,8 +209,9 @@ class _HomePageState extends State<HomePage> {
                                 Container(
                                   child: Text(
                                     ".",
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 32,
+                                    style: GoogleFonts.pacifico(
+                                        letterSpacing: 5,
+                                        fontSize: 42,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.deepPurple),
                                   ),
@@ -160,7 +247,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ],
-                    ),
+                    ),*/
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.9,
@@ -472,11 +559,32 @@ class _HomePageState extends State<HomePage> {
     String formattedDate = DateFormat.yMMMd().format(date);
     return InkWell(
       onLongPress: () async {
-        print("Income tile");
-        await dbHelper.deleteOne(index);
-        //dbHelper.addData(0, DateTime.now(), "", "");
-        dbHelper.addData(0, DateTime.now(), "", "");
-        setState(() {});
+        showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                  title: Text("Are you sure?"),
+                  content: Text("This record will be deleted."),
+                  actions: [
+                    TextButton(
+                        onPressed: () async {
+                          Navigator.pop(context);
+                        },
+                        child: Text("Cancel")),
+                    TextButton(
+                        onPressed: () async {
+                          Fluttertoast.showToast(msg: "Record Deleted");
+                          await dbHelper.deleteOne(index);
+
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => HomePage()));
+                        },
+                        child: Text("Ok")),
+                  ],
+                ));
+        /*Fluttertoast.showToast(msg: "All Data deleted");
+                DbHelper dbHelper = new DbHelper();
+                dbHelper.deleteAll();
+                Navigator.pop(context);*/
       },
       child: Container(
         margin: EdgeInsets.fromLTRB(8, 12, 8, 12),
@@ -542,12 +650,40 @@ class _HomePageState extends State<HomePage> {
     //container
     return InkWell(
       onLongPress: () async {
+        showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                  title: Text("Are you sure?"),
+                  content: Text("This record will be deleted"),
+                  actions: [
+                    TextButton(
+                        onPressed: () async {
+                          Navigator.pop(context);
+                        },
+                        child: Text("Cancel")),
+                    TextButton(
+                        onPressed: () async {
+                          Fluttertoast.showToast(msg: "Record Deleted");
+                          await dbHelper.deleteOne(index);
+
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => HomePage()));
+                        },
+                        child: Text("Ok")),
+                  ],
+                ));
+        /*Fluttertoast.showToast(msg: "All Data deleted");
+                DbHelper dbHelper = new DbHelper();
+                dbHelper.deleteAll();
+                Navigator.pop(context);*/
+      },
+      /*onLongPress: () async {
         print("Income tile");
         await dbHelper.deleteOne(index);
         //dbHelper.addData(0, DateTime.now(), "", "");
         dbHelper.addData(0, DateTime.now(), "", "");
         setState(() {});
-      },
+      },*/
       child: Container(
         margin: EdgeInsets.fromLTRB(8, 12, 8, 12),
         padding: EdgeInsets.all(15),
