@@ -3,6 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class DbHelper {
+  int deleteIndex = 0;
   late Box box;
   DbHelper() {
     openbox();
@@ -42,5 +43,10 @@ class DbHelper {
 
   compactAll() async {
     await box.compact();
+  }
+
+  incDeleteIndex() {
+    deleteIndex++;
+    print("delete index $deleteIndex");
   }
 }

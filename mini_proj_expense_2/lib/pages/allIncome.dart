@@ -66,7 +66,7 @@ class _allIncomeState extends State<allIncome> {
                             reverse: true,
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
-                            itemCount: snapshot.data!.length + 1,
+                            itemCount: snapshot.data!.length + 100,
                             itemBuilder: (context, index) {
                               dbHelper.compactAll();
                               Map dataAtIndex;

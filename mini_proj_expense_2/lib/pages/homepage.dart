@@ -19,6 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int del = 0;
   DbHelper dbHelper = DbHelper();
   int totalBalance = 0;
   int totalIncome = 0;
@@ -416,7 +417,7 @@ class _HomePageState extends State<HomePage> {
                       reverse: true,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: snapshot.data!.length,
+                      itemCount: snapshot.data!.length + 100,
                       itemBuilder: (context, index) {
                         //dbHelper.compactAll();
                         Map dataAtIndex;
@@ -601,9 +602,10 @@ class _HomePageState extends State<HomePage> {
                         onPressed: () async {
                           Fluttertoast.showToast(msg: "Record Deleted");
                           await dbHelper.deleteOne(index);
-
+                          del = del + 1;
                           Navigator.of(context).push(
                               MaterialPageRoute(builder: (_) => HomePage()));
+                          setState(() {});
                         },
                         child: Text("Ok")),
                   ],
