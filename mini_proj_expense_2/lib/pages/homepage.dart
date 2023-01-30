@@ -7,6 +7,7 @@ import 'package:mini_proj_expense_2/controllers/db_helper.dart';
 import 'package:mini_proj_expense_2/pages/addTransaction.dart';
 import 'package:mini_proj_expense_2/pages/allExpense.dart';
 import 'package:mini_proj_expense_2/pages/allIncome.dart';
+import 'package:mini_proj_expense_2/pages/categoryDisplay.dart';
 
 import 'package:mini_proj_expense_2/pages/search.dart';
 
@@ -107,31 +108,61 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => Search()));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      new BoxShadow(
-                        color: Color.fromARGB(255, 137, 137, 137),
-                        blurRadius: 20.0,
-                        offset: Offset(6, 6),
+              Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (_) => Search()));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          new BoxShadow(
+                            color: Color.fromARGB(255, 137, 137, 137),
+                            blurRadius: 20.0,
+                            offset: Offset(6, 6),
+                          ),
+                        ],
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                    ],
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.circular(20),
+                      padding: EdgeInsets.all(8),
+                      child: Icon(
+                        Icons.search,
+                        size: 28,
+                        color: Colors.deepPurple,
+                      ),
+                      margin: EdgeInsets.only(right: 8),
+                    ),
                   ),
-                  padding: EdgeInsets.all(8),
-                  child: Icon(
-                    Icons.search,
-                    size: 28,
-                    color: Colors.deepPurple,
-                  ),
-                  margin: EdgeInsets.only(right: 8),
-                ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => (CategoryDisplay())));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          new BoxShadow(
+                            color: Color.fromARGB(255, 137, 137, 137),
+                            blurRadius: 20.0,
+                            offset: Offset(6, 6),
+                          ),
+                        ],
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: EdgeInsets.all(8),
+                      child: Icon(
+                        Icons.category,
+                        size: 28,
+                        color: Colors.deepPurple,
+                      ),
+                      margin: EdgeInsets.only(right: 8),
+                    ),
+                  )
+                ],
               ),
             ],
           ),
@@ -339,7 +370,7 @@ class _HomePageState extends State<HomePage> {
                           LineChartBarData(
                             // spots: getPlotPoints(snapshot.data!),
                             spots: getPlotPoints(snapshot.data!),
-                            isCurved: true,
+                            isCurved: false,
                             barWidth: 3,
                             color: Colors.deepPurple,
                             showingIndicators: [200, 200, 90, 10],
@@ -403,7 +434,8 @@ class _HomePageState extends State<HomePage> {
                               dataAtIndex['note'],
                               dataAtIndex['date'],
                               dataAtIndex['type'],
-                              index);
+                              index,
+                              dataAtIndex['category']);
                         else
                           return expenseTile(
                             dataAtIndex['amount'],
@@ -411,6 +443,7 @@ class _HomePageState extends State<HomePage> {
                             dataAtIndex['date'],
                             dataAtIndex['type'],
                             index,
+                            dataAtIndex['category'],
                           );
                       })
                 ],
@@ -547,8 +580,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget expenseTile(
-      int value, String note, DateTime date, String type, int index) {
+  Widget expenseTile(int value, String note, DateTime date, String type,
+      int index, String category) {
     print("index $index");
     String formattedDate = DateFormat.yMMMd().format(date);
     return InkWell(
@@ -596,14 +629,46 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          children: <Widget>[
             Row(
               children: [
+                if (category == "Food")
+                  Icon(
+                    Icons.fastfood_outlined,
+                    size: 28,
+                    color: Colors.red,
+                  ),
+                if (category == "Travel")
+                  Icon(
+                    Icons.train_outlined,
+                    size: 28,
+                    color: Colors.red,
+                  ),
+                if (category == "Clothing")
+                  Icon(
+                    Icons.shopping_bag_outlined,
+                    size: 28,
+                    color: Colors.red,
+                  ),
+                if (category == "Rent")
+                  Icon(
+                    Icons.house_outlined,
+                    size: 28,
+                    color: Colors.red,
+                  ),
+                if (category == "Misc")
+                  Icon(
+                    Icons.miscellaneous_services_outlined,
+                    size: 28,
+                    color: Colors.red,
+                  ),
+                /*
                 Icon(
                   Icons.arrow_circle_up_rounded,
                   size: 28,
                   color: Colors.red,
                 ),
+                */
                 SizedBox(
                   width: 4.0,
                 ),
@@ -637,8 +702,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget incomeTile(
-      int value, String note, DateTime date, String type, int index) {
+  Widget incomeTile(int value, String note, DateTime date, String type,
+      int index, String category) {
     print("index $index");
     String formattedDate = DateFormat.yMMMd().format(date);
     //container

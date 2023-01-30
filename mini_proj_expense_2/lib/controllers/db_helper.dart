@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -11,8 +12,15 @@ class DbHelper {
     box = Hive.box('money');
   }
 
-  Future addData(int amount, DateTime date, String note, String type) async {
-    var value = {'amount': amount, 'date': date, 'type': type, 'note': note};
+  Future addData(int amount, DateTime date, String note, String type,
+      String catrgory) async {
+    var value = {
+      'amount': amount,
+      'date': date,
+      'type': type,
+      'note': note,
+      'category': catrgory
+    };
     box.add(value);
   }
 

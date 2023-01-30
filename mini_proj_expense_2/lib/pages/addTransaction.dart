@@ -16,6 +16,7 @@ class _AddTransactionState extends State<AddTransaction> {
   int? amount;
   String note = "No info";
   String type = "Income";
+  String category = 'Misc';
   DateTime selectedDate = DateTime.now();
   List<String> months = [
     "Jan",
@@ -255,8 +256,43 @@ class _AddTransactionState extends State<AddTransaction> {
           SizedBox(
             height: 20,
           ),
+          //
+          (type == "Income")
+              ? Container()
+              : DropdownButton(
+                  hint: Text(
+                    category,
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  isExpanded: true,
+                  iconSize: 30.0,
+                  style: TextStyle(color: Colors.blue),
+                  items: ['Food', 'Travel', 'Clothing', 'Rent', 'Misc'].map(
+                    (val) {
+                      return DropdownMenuItem<String>(
+                        value: val,
+                        child: Text(val),
+                      );
+                    },
+                  ).toList(),
+                  onChanged: (val) {
+                    setState(
+                      () {
+                        if (type == "Income") {
+                          category = "Income";
+                        } else {
+                          category = val!;
+                        }
+                      },
+                    );
+                  },
+                ),
+          SizedBox(
+            height: 20,
+          ),
           ElevatedButton(
               onPressed: () async {
+                /*
                 if (type == "Expense") {
                   if (amount == null || amount == 0) {
                     Fluttertoast.showToast(
@@ -276,12 +312,16 @@ class _AddTransactionState extends State<AddTransaction> {
                         msg: "Income Added", textColor: Colors.green);
                   }
                 }
+                */
                 if (amount != null && note.isNotEmpty) {
+                  print(category);
                   DbHelper dbHelper = new DbHelper();
-                  await dbHelper.addData(amount!, selectedDate, note, type);
+                  await dbHelper.addData(
+                      amount!, selectedDate, note, type, category);
                   Navigator.of(context).pop();
                 } else {
-                  print("Not all Values provided");
+                  Fluttertoast.showToast(msg: "Please add all the Values");
+                  print(category);
                 }
               },
               child: Text("Add")),
