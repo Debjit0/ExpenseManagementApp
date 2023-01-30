@@ -18,6 +18,21 @@ class _CategoryDisplayState extends State<CategoryDisplay> {
     "Xamarin": 2,
     "Ionic": 2,
   };
+
+  final gradientList = <List<Color>>[
+    [
+      Color.fromRGBO(223, 250, 92, 1),
+      Color.fromRGBO(129, 250, 112, 1),
+    ],
+    [
+      Color.fromRGBO(129, 182, 205, 1),
+      Color.fromRGBO(91, 253, 199, 1),
+    ],
+    [
+      Color.fromRGBO(175, 63, 62, 1.0),
+      Color.fromRGBO(254, 154, 92, 1),
+    ]
+  ];
   int totExp = 0;
   int foodAmt = 0;
   int rentAmt = 0;
@@ -432,7 +447,25 @@ class _CategoryDisplayState extends State<CategoryDisplay> {
                     //
                     //
                     Container(
-                      child: PieChart(dataMap: getPieSection(snapshot.data!)),
+                      margin: EdgeInsets.all(12),
+                      padding: EdgeInsets.all(12),
+                      width: double.infinity,
+                      height: 360,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        boxShadow: [
+                          new BoxShadow(
+                            color: Color.fromARGB(255, 137, 137, 137),
+                            blurRadius: 20.0,
+                            offset: Offset(6, 6),
+                          ),
+                        ],
+                        borderRadius: BorderRadius.all(Radius.circular(24)),
+                      ),
+                      child: PieChart(
+                        dataMap: getPieSection(snapshot.data!),
+                        gradientList: gradientList,
+                      ),
                     ),
                   ],
                 );
