@@ -4,10 +4,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import './pages/splash.dart';
 
 void main() async {
+  //WidgetsFlutterBinding.ensureInitialized();
+  //await Firebase.initializeApp();
   await Hive.initFlutter();
   await Hive.openBox('money');
   runApp(const MyApp());
 }
+//gjgjgjgjg
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
